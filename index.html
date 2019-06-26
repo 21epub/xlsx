@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/handsontable@latest/dist/handsontable.full.min.css">
+<link rel="stylesheet" type="text/css" href="https://handsontable.com/static/css/main.css">
+<script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+
+<style>
+    #main-container {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 51px;
+    }
+    #code-container {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        width: 50%;
+    }
+    #right-container {
+        position: absolute;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        padding: 0;
+        
+        border: none;
+        z-index: 30;
+        background: #f3f3f3;
+    }
+    .inline-block{
+        display:inline-block;
+    }
+
+</style>
+</head>
+<body>
+<h1 style="text-align: center;"> ECharts 入门示例</h1>
+<div style="    padding-right: 20px;position: absolute;  right: 0;top: 0;">
+    <p style="padding:0px;marggin:0px;" class="inline-block">选择类型:</p>
+    <div class="inline-block">
+        <input type="radio" id="line" name="drone" value="line"  checked>
+        <label for="line">line</label>
+    </div>
+
+    <div class="inline-block">
+        <input type="radio" id="bar" name="drone" value="bar">
+        <label for="bar">bar</label>
+    </div>
+
+    <div class="inline-block">
+        <input type="radio" id="pie" name="drone" value="pie">
+        <label for="pie">pie</label>
+    </div>
+</div>
+<div id="main-container">
+    <div id="code-container"></div>
+    <div id="right-container" ></div>
+</div>
+
+<script>
+
+var myChart = echarts.init(document.getElementById('code-container'));
+
+// 指定图表的配置项和数据
+var option = {
+    title: {
+        text: ''
+    },
+    tooltip: {},
+    legend: {
+        data:['销量']
+    },
+    xAxis: {
+        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+    },
+    yAxis: {},
+    series: [{
+        name: '销量',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+    }]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+var data = [
+  ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],
+  ['2017', 10, 11, 12, 13],
+  ['2018', 20, 11, 14, 13],
+  ['2019', 30, 15, 12, 13]
+];
+
+var container = document.getElementById('right-container');
+var hot = new Handsontable(container, {
+  data: data,
+  rowHeaders: true,
+  colHeaders: true,
+  afterChange:function(){
+        var ret ;
+        if(!hot){
+            ret = data;
+        }else{
+            ret = hot.getData();
+        }
+        filterData(ret)
+    }   
+});
+function filterData(data){
+    var type= $('input:radio:checked').val();
+    if(data&&data.length){
+        xAxisData = data[0].slice(1);
+        seriesData = [];
+        var len = data.length;
+        for(var i=1;i<len;i++){
+            seriesData.push({
+                name:data[i][0],
+                type: type,
+                data:data[i].slice(1)
+            })
+        }
+        option.xAxis.data = xAxisData;
+        option.series = seriesData;
+        console.log(option);
+        myChart.setOption(option);
+    }
+}
+var test = `
+""	NorthAmerica	Asia	Europe	SouthAmerica
+2011	7664	747	5334	2546
+2012	10286	1195	4731	1909
+2013	13094	2277	7572	2798
+2014	14964	5943	5195	3378
+2015	17968	11385	4116	3371
+2016	18566	15245	6025	4087
+`
+
+$('input[type=radio][name=drone]').change(function() {
+    var seriesData = option.series;
+    var len = seriesData.length;
+    for(var i=0;i<len;i++){
+        option.series[i].type=this.value
+    }
+    myChart.setOption(option);
+})
+
+console.log(test);
+</script>
+</body>
+</html>
