@@ -1,13 +1,10 @@
 <!doctype html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/handsontable@latest/dist/handsontable.full.min.css">
-<link rel="stylesheet" type="text/css" href="https://handsontable.com/static/css/main.css">
-<script src="https://cdn.jsdelivr.net/npm/handsontable@6.2.2/dist/handsontable.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
 
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.js"></script>
+<script  type="text/javascript"src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script type="text/javascript" src="./dist/main.js"></script>
 <style>
     #main-container {
         position: absolute;
@@ -65,93 +62,107 @@
 </div>
 
 <script>
+$(function(){
+    var myChart = echarts.init(document.getElementById('code-container'));
 
-var myChart = echarts.init(document.getElementById('code-container'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: ''
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
 
-// 指定图表的配置项和数据
-var option = {
-    title: {
-        text: ''
-    },
-    tooltip: {},
-    legend: {
-        data:['销量']
-    },
-    xAxis: {
-        data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-    },
-    yAxis: {},
-    series: [{
-        name: '销量',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-    }]
-};
-
-// 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
-
-var data = [
-  ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],
-  ['2017', 10, 11, 12, 13],
-  ['2018', 20, 11, 14, 13],
-  ['2019', 30, 15, 12, 13]
-];
-
-var container = document.getElementById('right-container');
-var hot = new Handsontable(container, {
-  data: data,
-  rowHeaders: true,
-  colHeaders: true,
-  afterChange:function(){
-        var ret ;
-        if(!hot){
-            ret = data;
-        }else{
-            ret = hot.getData();
-        }
-        filterData(ret)
-    }   
-});
-function filterData(data){
-    var type= $('input:radio:checked').val();
-    if(data&&data.length){
-        xAxisData = data[0].slice(1);
-        seriesData = [];
-        var len = data.length;
-        for(var i=1;i<len;i++){
-            seriesData.push({
-                name:data[i][0],
-                type: type,
-                data:data[i].slice(1)
-            })
-        }
-        option.xAxis.data = xAxisData;
-        option.series = seriesData;
-        console.log(option);
-        myChart.setOption(option);
-    }
-}
-var test = `
-""	NorthAmerica	Asia	Europe	SouthAmerica
-2011	7664	747	5334	2546
-2012	10286	1195	4731	1909
-2013	13094	2277	7572	2798
-2014	14964	5943	5195	3378
-2015	17968	11385	4116	3371
-2016	18566	15245	6025	4087
-`
-
-$('input[type=radio][name=drone]').change(function() {
-    var seriesData = option.series;
-    var len = seriesData.length;
-    for(var i=0;i<len;i++){
-        option.series[i].type=this.value
-    }
+    // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+
+    var data = [
+    ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],
+    ['2017', 10, 11, 12, 13],
+    ['2018', 20, 11, 14, 13],
+    ['2019', 30, 15, 12, 13]
+    ];
+   
+    var container = document.getElementById('right-container');
+     var hot = new Xlsx({
+        container:container,
+        data: data,
+        onChange:function(data){
+            console.log(data)
+            filterData(data)
+        }
+    })
+    /*
+    
+    var hot = new Xlsx(container, {
+    data: data,
+    rowHeaders: true,
+    colHeaders: true,
+    afterChange:function(){
+            var ret ;
+            if(!hot){
+                ret = data;
+            }else{
+                ret = hot.getData();
+            }
+            filterData(ret)
+        }   
+    });
+    
+    */
+    function filterData(data){
+        var type= $('input:radio:checked').val();
+        if(data&&data.length){
+            xAxisData = data[0].slice(1);
+            seriesData = [];
+            var len = data.length;
+            for(var i=1;i<len;i++){
+                seriesData.push({
+                    name:data[i][0],
+                    type: type,
+                    data:data[i].slice(1)
+                })
+            }
+            option.xAxis.data = xAxisData;
+            option.series = seriesData;
+            console.log(option);
+            myChart.setOption(option);
+        }
+    }
+    var test = `
+    ""	NorthAmerica	Asia	Europe	SouthAmerica
+    2011	7664	747	5334	2546
+    2012	10286	1195	4731	1909
+    2013	13094	2277	7572	2798
+    2014	14964	5943	5195	3378
+    2015	17968	11385	4116	3371
+    2016	18566	15245	6025	4087
+    `
+
+    $('input[type=radio][name=drone]').change(function() {
+        var seriesData = option.series;
+        var len = seriesData.length;
+        for(var i=0;i<len;i++){
+            option.series[i].type=this.value
+        }
+        myChart.setOption(option);
+    })
+
+    console.log(test);
 })
 
-console.log(test);
 </script>
 </body>
 </html>

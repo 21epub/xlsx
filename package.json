@@ -1,0 +1,25 @@
+{
+  "name": "xlsx",
+  "version": "1.0.0",
+  "description": "直接运行index.html",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@code.aliyun.com:wagon1104/handsontable.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+   
+  },
+  "devDependencies": {
+    "handsontable": "^6.2.2",
+    "webpack": "^4.35.2",
+    "css-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.3.5"
+  }
+}
