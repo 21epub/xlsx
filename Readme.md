@@ -11,7 +11,8 @@
         ],
         onChange:function(data){
             
-        }
+        },
+        language: 'zh-CN'
     })
 
 
