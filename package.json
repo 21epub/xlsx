@@ -1,7 +1,7 @@
 {
-  "name": "xlsx",
-  "version": "1.0.0",
-  "description": "直接运行index.html",
+  "name": "@heieo/xlsx",
+  "version": "0.0.1",
+  "description": "",
   "main": "dist/main.js",
   "scripts": {
     "start": "webpack"
