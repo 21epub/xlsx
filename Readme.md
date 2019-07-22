@@ -1,7 +1,7 @@
 ### 使用方法
 
-    import Xls from 'xls';
-    var xls = new Xls({
+    import Xlsx  from 'xlsx ';
+    var xlsx = new Xlsx({
         container:container,
         data:[
             ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],

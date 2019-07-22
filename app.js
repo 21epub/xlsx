@@ -7,6 +7,8 @@ module.exports=function(opt){
     var data=opt.data||[[]];
     var onChange =opt.onChange||function(){} ;
     var language =opt.language||'en-US' ;
+    var minCols =opt.minCols||8 ;
+    var minRows =opt.minRows||50 ;
   
 
     var hot = new Handsontable(container,{
@@ -15,19 +17,20 @@ module.exports=function(opt){
         colHeaders: true,
         contextMenu:true,
         autoColumnSize:true,
-        minCols:5,
-        minRows:5,
+        minCols:minCols,
+        minRows:minRows,
         stretchH:"all",
         language: language,
         afterChange:function(){
-                var ret ;
-                if(!hot){
-                    ret = data;
-                }else{
-                    ret = hot.getData();
-                }
-                onChange(ret)
+            var ret ;
+            if(!hot){
+                ret = data;
+            }else{
+                ret = hot.getData();
             }
+            onChange(ret)
+        }
+
     });
     return hot;
 }

@@ -96,7 +96,7 @@ $(function(){
     ];
    
     var container = document.getElementById('right-container');
-     var hot = new Xlsx({
+     var hot = new xlsx({
         container:container,
         data: data,
         onChange:function(data){
@@ -104,7 +104,8 @@ $(function(){
             filterData(data)
         },
         language: 'zh-CN'
-    })
+    });
+    window.hot = hot;
     /*
     
     var hot = new Xlsx(container, {

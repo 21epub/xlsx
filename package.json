@@ -1,7 +1,7 @@
 {
-  "name": "@heieo/xlsx",
-  "version": "0.0.1",
-  "description": "",
+  "name": "xlsx",
+  "version": "1.0.0",
+  "description": "直接运行index.html",
   "main": "dist/main.js",
   "scripts": {
     "start": "webpack"
@@ -12,9 +12,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-   
-  },
+  "dependencies": {},
   "devDependencies": {
     "handsontable": "^6.2.2",
     "webpack": "^4.35.2",
