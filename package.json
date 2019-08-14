@@ -1,6 +1,6 @@
 {
-  "name": "xlsx",
-  "version": "1.0.0",
+  "name": "@heieo/xlsx",
+  "version": "0.1.1",
   "description": "直接运行index.html",
   "main": "dist/main.js",
   "scripts": {
