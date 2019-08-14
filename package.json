@@ -1,5 +1,5 @@
 {
-  "name": "xlsx",
+  "name": "@heieo/xlsx",
   "version": "0.1.1",
   "description": "直接运行index.html",
   "main": "dist/main.js",

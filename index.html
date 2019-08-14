@@ -89,7 +89,7 @@ $(function(){
     myChart.setOption(option);
 
     var data = [
-    ['', 'Ford', 'Tesla', 'Toyota', 'Honda'],
+    ['-', 'Ford', 'Tesla', 'Toyota', 'Honda'],
     ['2017', 10, 11, 12, 13],
     ['2018', 20, 11, 14, 13],
     ['2019', 30, 15, 12, 13]
@@ -101,7 +101,13 @@ $(function(){
         data: data,
         onChange:function(data){
             console.log(data)
-            filterData(data)
+            // 过滤掉空值和空数组
+            let array=[];
+            for (var i in data){
+                arr =  data[i].filter(function(n){return n});          
+               if (JSON.stringify(arr) != '[]') array.push(arr);
+            }
+            filterData(array)
         },
         language: 'zh-CN'
     });
