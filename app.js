@@ -29,8 +29,25 @@ module.exports=function(opt){
                 ret = hot.getData();
             }
             onChange(ret)
+        },
+        afterRemoveCol:function(){
+          console.log("-------afterRemoveCo----------");
+          if(!hot){
+              ret = data;
+          }else{
+              ret = hot.getData();
+          }
+          onChange(ret)
+        },
+        afterRemoveRow:function(){
+            console.log("-------afterRemoveRow----------");
+            if(!hot){
+                ret = data;
+            }else{
+                ret = hot.getData();
+            }
+            onChange(ret)
         }
-
     });
     return hot;
 }
