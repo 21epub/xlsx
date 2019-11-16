@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.2](https://code.aliyun.com/wagon1104/handsontable/compare/v0.2.1...v0.2.2) (2019-11-16)
+
+
+### Bug Fixes
+
+* 在项目中存在无法粘贴Excel内容的问题 ([88f75e6](https://code.aliyun.com/wagon1104/handsontable/commits/88f75e6))
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
 ## [0.2.1](https://code.aliyun.com/wagon1104/handsontable/compare/v0.2.0...v0.2.1) (2019-08-15)
 
 
